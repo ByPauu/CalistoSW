@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calisto Shop</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.png"/>
+  <script>
+    // JavaScript para el menú hamburguesa
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.querySelector('.hamburger');
+      const navCenter = document.querySelector('.navcenter');
+      const overlay = document.querySelector('.overlay');
+      
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navCenter.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+      
+      overlay.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navCenter.classList.remove('active');
+        this.classList.remove('active');
+      });
+      
+      // Cerrar el menú al hacer clic en un enlace (para móviles)
+      const navLinks = document.querySelectorAll('.navcenter a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            hamburger.classList.remove('active');
+            navCenter.classList.remove('active');
+            overlay.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+@font-face {
+  font-family: Fenix;
+  src: url('medio.otf');
+}
+
+body {
+  margin: 0;
+  background-color: #1f1f1f;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+      position: relative;
+      background-color: #1f1f1f;
+      height: 80px;
+      padding: 0 40px;
+      font-family: Perpetua Titling MT;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+.logo {
+  z-index: 1001;
+}
+
+.logo img {
+  height: 60px;
+}
+
+/* Menú Hamburguesa */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Nav Center - Centrado en desktop */
+.navcenter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navcenter ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navcenter li {
+  position: relative;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.navcenter li a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.navcenter li a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.navcenter li a:hover::after {
+  width: 100%;
+}
+
+/* Estilos para móvil */
+@media (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  
+  .navcenter {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: #1f1f1f;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding-top: 80px;
+    box-sizing: border-box;
+    transform: none;
+  }
+  
+  .navcenter.active {
+    left: 0;
+  }
+  
+  .navcenter ul {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Animación del icono hamburguesa a X */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+  
+  .overlay.active {
+    display: block;
+  }
+}
+
+/* ARTICLE */
+article {
+  background-image: url("images/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 832px;
+  padding: 50px;
+  text-align: center; /* Para centrar contenido inline */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+article > div {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 80%; /* O el ancho que desees */
+  text-align: center; /* Centra el texto dentro del cuadro */
+}
+
+article > div h2 {
+  font-size: 2rem; /* Ajusta el tamaño del título si es necesario */
+  margin-bottom: 20px;
+}
+
+article > div p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* FOOTER */
+
+/* FOOTER */
+footer {
+  padding: 40px 20px;
+  background-color: #1f1f1f;
+  text-align: center;
+  font-family: Fenix;
+  font-size: 1.2rem;
+}
+
+footer form {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.footer-links a {
+  color: #cfcfcf;
+  text-decoration: none;
+}
+
+.social-icons {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0.7);
+  transition: filter 0.3s;
+}
+
+.social-icons img:hover {
+  filter: brightness(1);
+}
+
+.footer-copy {
+  color: #777;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.inputcont {
+  border-radius: 5px;
+  color: #f1f1f1;
+  padding: 10px 20px;
+  border: 2px solid #464646;
+  font-size: 16px;
+  background-color: #363636;
+}
+
+footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 1rem;
+}
+hr {
+  border: none;
+  border-top: 2px solid rgb(73, 73, 73); /* Cambia 'white' al color que quieras */
+  margin: 20px 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 1rem;
+}
+.nostyle{
+  color: #777;
+  text-decoration: underline;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+    </div>
+    
+    <button class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <nav class="navcenter">
+      <ul>
+        <li><a href="drops.html">Drops</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+    
+    <div class="overlay"></div>
+  </header>
+
+  <article>
+  <div style="background-color: rgba(0, 0, 0, 0.6); padding: 40px; border-radius: 10px; max-width: 80%; text-align: center;">
+    <p style="font-size: 1.3rem; line-height: 1.6;">
+      About Us: Dressing Your Passion with Quality and Determination - CalistoSW
+    </p>
+    <p style="font-size: 1.0rem; line-height: 1.6;">
+      At CalistoSW, we fuel your pursuit of self-improvement through values like <strong>consistency</strong>, <strong>effort</strong>, <strong>discipline</strong>, and <strong>perseverance</strong>. We believe in <strong>dedication</strong>, <strong>passion</strong>, and <strong>integrity</strong> every step of the way.
+    </p>
+    <p style="font-size: 1.0rem; line-height: 1.6;">
+      "<strong>El dolor es momentaneo, la gloria es Eterna.</strong>" This inspiring quote by Geronimo Arias guides our philosophy. We offer <strong>top-quality</strong> garments designed for <strong>innovation</strong>, <strong>comfort</strong>, and <strong>durability</strong>, supporting you in every challenge.
+    </p>
+    <p style="font-size: 1.0rem; line-height: 1.6;">
+      More than a store, CalistoSW is a community of athletes focused on excellence. Discover clothing that not only dresses you but also motivates you to reach your full potential. Join CalistoSW and dress your passion with the quality that drives you forward.
+    </p>
+  </div>
+  </article>
+
+
+  <footer>
+    
+    <div>5% Off in your first order</div>
+    <form action="mailto:leandrezgo@esat-alumni.com" method="post" enctype="text/plain" name="form1">
+      <input class="inputcont" type="email" placeholder="yourmail@calistosw.com">
+      <input class="inputcont" type="submit" value="Submit">
+    </form>
+    <br>
+    <hr>
+    <br>
+    <ul class="footer-links">
+      <li><a href="privacythings.html">Privacy Policy</a></li>
+      <li>•</li>
+      <li><a href="privacythings.html">Shipping Policy</a></li>
+      <li>•</li>
+      <li><a href="help.html">Contact</a></li>
+      <li>•</li>
+      <li><a href="about.html">About Us</a></li>
+      <li>•</li>
+      <li><a href="privacythings.html">Returns / Exchanges Policy</a></li>
+    </ul>
+  
+    <div class="social-icons">
+      <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="images/pinterest.png" alt="Pinterest"></a>
+    </div>
+  
+    <p class="footer-copy">© 2025 Calisto Clothing. All rights reserved. <a class="nostyle" href="pdf.html">Made by Pauu</a></p>
+  </footer>
+
+</body>
+</html>
